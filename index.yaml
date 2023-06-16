@@ -1,14 +1,14 @@
 apiVersion: v1
 entries:
-  jarc-project2-chart:
+  jarc-project2:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-06-15T17:53:55.7540822-06:00"
+    created: "2023-06-16T08:52:58.751424-06:00"
     description: A Helm chart for Kubernetes
-    digest: 3f30dfe8e7475c298715948f21e58addecf76c0e042be73ad38b8536b34e7870
-    name: jarc-project2-chart
+    digest: 8764659f33fa0ab9246e9ac044f1a49317fe982e5f4e66a0d5b7d356c9b4fbb4
+    name: jarc-project2
     type: application
     urls:
-    - https://github.com/AndressRod/nclouds-sample-app/jarc-project2-chart-0.1.0.tgz
-    version: 0.1.0
-generated: "2023-06-15T17:53:55.7499433-06:00"
+    - https://andressrod.github.io/nclouds-sample-app/jarc-project2-1.0.0.tgz
+    version: 1.0.0
+generated: "2023-06-16T08:52:58.7472777-06:00"
