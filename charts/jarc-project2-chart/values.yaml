@@ -1,0 +1,68 @@
+# Default values for jarc-project2-chart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+nameOverride: ""
+fullnameOverride: "jarodriguezc-project-2"
+
+labels:
+  app: nclouds
+  project: "2"
+  owner: jarodriguezc
+
+replicaCount: 1
+
+podAnnotations: {}
+
+imagePullSecrets: []
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+image:
+  repository: ncloudspublic/sample-app
+  tag: "latest"
+  pullPolicy: IfNotPresent
+
+
+podSecurityContext: {}
+
+resources: 
+  limits: 
+    cpu: 500m
+    memory: "256Mi"
+  requests: 
+    cpu: 100m
+    memory: "128Mi"
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+service:
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: jarodriguezc.training.test-something.com
+  type: LoadBalancer
+  port: 3000
+
+autoscaling:
+  enabled: true
+  minReplicas: 3
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 70
+  targetMemoryUtilizationPercentage: 70
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: false
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""

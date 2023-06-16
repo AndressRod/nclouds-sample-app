@@ -16,8 +16,8 @@ jobs:
       - run:
           name: building
           command: |
-            docker build -t ${ACCOUNT_ID}.dkr.ecr.${REGION}.amazonaws.com/${REPO}:${CIRCLE_SHA1:0:10} .
-            docker push ${ACCOUNT_ID}.dkr.ecr.${REGION}.amazonaws.com/${REPO}:${CIRCLE_SHA1:0:10}
+            docker build -t ${ACCOUNT_ID}.dkr.ecr.${REGION}.amazonaws.com/${REPO}:v${CIRCLE_BUILD_NUM} .
+            docker push ${ACCOUNT_ID}.dkr.ecr.${REGION}.amazonaws.com/${REPO}:v${CIRCLE_BUILD_NUM}
   k8s:
     docker: 
       - image: arogudl/readytodeploy
