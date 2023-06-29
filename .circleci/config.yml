@@ -32,7 +32,6 @@ jobs:
           release-name: jarc-nclouds-project
           chart: jarc-project2
           namespace: jarodriguezc
-          helm-version: v1.0.0
           values-to-override: image.repository=${ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${REPO},image.tag=v${CIRCLE_BUILD_NUM}
 workflows:
   nclouds_workflow:
