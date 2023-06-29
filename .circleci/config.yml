@@ -30,7 +30,7 @@ jobs:
       - helm/install-helm-chart:
           add-repo: "https://andressrod.github.io/nclouds-sample-app/"
           release-name: jarc-nclouds-project
-          chart: jarc-project2
+          chart: "https://andressrod.github.io/nclouds-sample-app/jarc-project2-1.0.0.tgz"
           namespace: jarodriguezc
           values-to-override: image.repository=${ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${REPO},image.tag=v${CIRCLE_BUILD_NUM}
 workflows:
