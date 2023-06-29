@@ -2,17 +2,15 @@
 version: 2.1
 orbs:
   aws-ecr: circleci/aws-ecr@8.2.1
+  aws-cli: circleci/aws-cli@4.0.0
   aws-eks: circleci/aws-eks@2.2.0
   helm: circleci/helm@2.0.1
 jobs:
   assume-k8s-role:
-    docker: 
-      - image: arogudl/readytodeploy
+    executor: aws-cli/default
     steps:
       - checkout
-      - run:
-          name: "Kubernetes"
-          command: |
+      - run: >-
             ACCOUNT_ROLE=$(aws sts assume-role --role-arn ${KUBE_ROLE} --role-session-name k8s)
             export AWS_ACCESS_KEY_ID=$(echo "${ACCOUNT_ROLE}" | jq -r '.Credentials.AccessKeyId')
             export AWS_SECRET_ACCESS_KEY=$(echo "${ACCOUNT_ROLE}" | jq -r '.Credentials.SecretAccessKey')
