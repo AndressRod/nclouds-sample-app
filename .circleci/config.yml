@@ -6,7 +6,8 @@ orbs:
   helm: circleci/helm@2.0.1
 jobs:
   install-helm-chart:
-    executor: aws-eks/python
+    docker:
+      - image: cimg/python:3.10
     parameters:
       cluster-name:
         description: Cluster name
