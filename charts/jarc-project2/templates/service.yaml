@@ -12,7 +12,7 @@ spec:
     {{- include "jarc-project2-chart.selectorLabels" . | nindent 4 }}
   ports:
     - port: {{ .Values.service.port }}
-      targetPort: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.targetPort }}
       protocol: TCP
       name: nclouds-svc
   type: {{ .Values.service.type }}
