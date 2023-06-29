@@ -16,12 +16,11 @@ jobs:
           cluster-name: << parameters.cluster-name >>
           cluster-authentication-role-arn: ${KUBE_ROLE}
       - helm/install-helm-chart:
-          add-repo: https://andressrod.github.io/nclouds-sample-app/
+          add-repo: "https://andressrod.github.io/nclouds-sample-app/"
           release-name: jarc-nclouds-project
           chart: jarc-project2
           namespace: jarodriguezc
           helm-version: v1.0.0
-          release-name: jarc-release
           values-to-override: image.repository=${ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${REPO},image.tag=v${CIRCLE_BUILD_NUM}
 workflows:
   nclouds_workflow:
