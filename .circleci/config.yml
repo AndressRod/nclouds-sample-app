@@ -5,7 +5,7 @@ orbs:
   aws-eks: circleci/aws-eks@2.2.0
   helm: circleci/helm@2.0.1
 jobs:
-  assume-role:
+  assume-k8s-role:
     steps:
       - checkout
       - run:
@@ -42,8 +42,9 @@ workflows:
       - aws-ecr/build-and-push-image:
           repo: ${REPO}
           tag: v${CIRCLE_BUILD_NUM}
+      - assume-k8s-role
       - install-helm-chart:
           cluster-name: ${EKS_CLUSTER_NAME}
           requires:
             - aws-ecr/build-and-push-image
-            - assume-role
+            - assume-k8s-role
