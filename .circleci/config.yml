@@ -10,6 +10,8 @@ jobs:
     executor: aws-cli/default
     steps:
       - checkout
+      - aws-cli/setup:
+          profile_name: default
       - run: >-
             ACCOUNT_ROLE=$(aws sts assume-role --role-arn ${KUBE_ROLE} --role-session-name k8s)
             export AWS_ACCESS_KEY_ID=$(echo "${ACCOUNT_ROLE}" | jq -r '.Credentials.AccessKeyId')
@@ -41,7 +43,8 @@ workflows:
       - aws-ecr/build-and-push-image:
           repo: ${REPO}
           tag: v${CIRCLE_BUILD_NUM}
-      - assume-k8s-role
+      - assume-k8s-role:
+          context: aws
       - install-helm-chart:
           cluster-name: ${EKS_CLUSTER_NAME}
           requires:
