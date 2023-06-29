@@ -26,13 +26,14 @@ jobs:
           cluster-name: << parameters.cluster-name >>
           aws-region: ${AWS_REGION}
           aws-profile: k8s
+          cluster-authentication-role-arn: ${KUBE_ROLE}
           verbose: true
       - helm/install-helm-chart:
           add-repo: "https://andressrod.github.io/nclouds-sample-app/"
           release-name: jarc-nclouds-project
           chart: "https://andressrod.github.io/nclouds-sample-app/jarc-project2-1.0.0.tgz"
           namespace: jarodriguezc
-          values-to-override: image.repository=${ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${REPO},image.tag=v${CIRCLE_BUILD_NUM}
+          values-to-override: "image.repository=${ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${REPO},image.tag=v${CIRCLE_BUILD_NUM}"
 workflows:
   nclouds_workflow:
     jobs:
