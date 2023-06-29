@@ -5,6 +5,17 @@ orbs:
   aws-eks: circleci/aws-eks@2.2.0
   helm: circleci/helm@2.0.1
 jobs:
+  assume-role:
+    steps:
+      - checkout
+      - run:
+          name: "Kubernetes"
+          command: |
+            ACCOUNT_ROLE=$(aws sts assume-role --role-arn ${KUBE_ROLE} --role-session-name k8s)
+            export AWS_ACCESS_KEY_ID=$(echo "${ACCOUNT_ROLE}" | jq -r '.Credentials.AccessKeyId')
+            export AWS_SECRET_ACCESS_KEY=$(echo "${ACCOUNT_ROLE}" | jq -r '.Credentials.SecretAccessKey')
+            export AWS_SESSION_TOKEN=$(echo "${ACCOUNT_ROLE}" | jq -r '.Credentials.SessionToken')
+            aws eks update-kubeconfig --name nclouds-cluster --region ${REGION}
   install-helm-chart:
     docker:
       - image: cimg/python:3.10
@@ -35,3 +46,4 @@ workflows:
           cluster-name: ${EKS_CLUSTER_NAME}
           requires:
             - aws-ecr/build-and-push-image
+            - assume-role
